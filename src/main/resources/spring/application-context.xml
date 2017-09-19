@@ -27,6 +27,7 @@
 			<list>
 				<!-- 这里支持多种寻址方式：classpath和file -->
 				<value>classpath:config.properties</value>
+				<value>classpath:quartz.properties</value>
 			</list>
 		</property>
 	</bean>
