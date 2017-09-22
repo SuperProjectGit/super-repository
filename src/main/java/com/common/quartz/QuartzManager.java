@@ -58,8 +58,6 @@ public class QuartzManager {
             scheduler.scheduleJob(jobDetail, cronTrigger);
             scheduler.start();
             Thread.sleep(90 * 1000);
-            //scheduler.shutdown(true);
-            //scheduler = schedulerFactory.getScheduler();
             CronExpression cronExpressionNew = new CronExpression("0/10 * * * * ?");
             cronExpression.setTimeZone(TimeZone.getTimeZone("GMT+8"));
             CronTrigger cronTriggerNew = TriggerBuilder.newTrigger().withIdentity("trigger1", "group1").withSchedule(CronScheduleBuilder.cronSchedule(cronExpressionNew).withMisfireHandlingInstructionIgnoreMisfires()).forJob(jobDetail).build();
