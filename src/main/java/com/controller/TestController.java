@@ -22,7 +22,6 @@ public class TestController {
     @RequestMapping("test")
     @ResponseBody
     public String test() {
-        quartzSpring.test1();
         return "success";
     }
 }
