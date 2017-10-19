@@ -37,9 +37,4 @@ public class Test extends BaseTest {
         String s = "0";
         System.out.println(s.equals(s = "1"));
     }
-
-    @org.junit.Test
-    public void test() {
-        quartzSpring.test1();
-    }
 }
