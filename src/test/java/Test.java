@@ -1,8 +1,6 @@
 import com.common.quartz.QuartzSpring;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 /**
  * Test
  *
@@ -36,5 +34,10 @@ public class Test extends BaseTest {
 
         String s = "0";
         System.out.println(s.equals(s = "1"));
+    }
+
+    @org.junit.Test
+    public void test() {
+        System.out.println("success");
     }
 }
