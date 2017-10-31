@@ -1,4 +1,4 @@
-package com.common.pattern;
+package com.common.pattern.singleton;
 /**
  * 双重检查使用volatile保证线程安全
  * @author subo

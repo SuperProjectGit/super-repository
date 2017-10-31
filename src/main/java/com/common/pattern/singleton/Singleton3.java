@@ -1,4 +1,4 @@
-package com.common.pattern;
+package com.common.pattern.singleton;
 /**
  * 饿汉式单例，内存使用效率不高
  * @author subo

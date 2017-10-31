@@ -1,4 +1,4 @@
-package com.common.pattern;
+package com.common.pattern.singleton;
 /**
  * 线程安全的单例，但是性能不好
  * @author subo

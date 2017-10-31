@@ -1,4 +1,4 @@
-package com.common.pattern;
+package com.common.pattern.singleton;
 
 /**
  * 内部类单例
@@ -11,10 +11,10 @@ public class Singleton4 {
 	}
 	
 	private static class SingletonHolder {
-		private final static Singleton4 singleton = new Singleton4();
+		private final static Singleton4 SINGLETON = new Singleton4();
 	}
 	
 	public static Singleton4 getInstance() {
-		return SingletonHolder.singleton;
+		return SingletonHolder.SINGLETON;
 	}
 }

@@ -1,4 +1,4 @@
-package com.common.pattern;
+package com.common.pattern.singleton;
 /**
  * 多线程环境有线程安全问题
  * @author subo

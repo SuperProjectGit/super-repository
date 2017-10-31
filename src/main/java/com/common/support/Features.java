@@ -164,8 +164,16 @@ public class Features {
 
 
     private enum Status {
-        OPEN,CLOSED
-    };
+        /**
+         * 打开
+         */
+        OPEN,
+
+        /**
+         * 关闭
+         */
+        CLOSED
+    }
 
     private static final class Task {
 
