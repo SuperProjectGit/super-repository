@@ -34,10 +34,18 @@ public class Test extends BaseTest {
 
         String s = "0";
         System.out.println(s.equals(s = "1"));
+
+        t(1);
     }
 
     @org.junit.Test
     public void test() {
         System.out.println("success");
+    }
+
+    public static void t(Integer i) {
+        Integer t = i;
+        t = null;
+        System.out.println(t.equals(1));
     }
 }
