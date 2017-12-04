@@ -42,5 +42,10 @@
 		<property name="maxUploadSize" value="52428800" />
 		<property name="maxInMemorySize" value="52428800" />
 	</bean>
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="customArgumentResolvers">
+			<bean class="com.common.CustomResolver"></bean>
+		</property>
+	</bean>
 	<aop:aspectj-autoproxy proxy-target-class="true"/>
 </beans>
