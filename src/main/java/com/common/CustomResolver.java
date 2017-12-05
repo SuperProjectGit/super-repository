@@ -15,11 +15,12 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 public class CustomResolver implements HandlerMethodArgumentResolver {
     @Override
     public boolean supportsParameter(MethodParameter methodParameter) {
-        return false;
+        return true;
     }
 
     @Override
     public Object resolveArgument(MethodParameter methodParameter, ModelAndViewContainer modelAndViewContainer, NativeWebRequest nativeWebRequest, WebDataBinderFactory webDataBinderFactory) throws Exception {
-        return null;
+        System.out.println(methodParameter.getParameterName());
+        return methodParameter;
     }
 }

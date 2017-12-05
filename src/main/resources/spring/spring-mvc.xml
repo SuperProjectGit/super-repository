@@ -24,6 +24,9 @@
 			<bean
 				class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter" />
 		</mvc:message-converters>
+		<mvc:argument-resolvers>
+			<bean class="com.common.CustomResolver"></bean>
+		</mvc:argument-resolvers>
 	</mvc:annotation-driven>
 
 	<!-- 定义JSP文件的位置 -->

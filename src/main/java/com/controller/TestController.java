@@ -30,4 +30,11 @@ public class TestController {
         testService.testService();
         return "success";
     }
+
+    @RequestMapping("test1")
+    @ResponseBody
+    public String test(String name) {
+        System.out.println(name);
+        return "success";
+    }
 }

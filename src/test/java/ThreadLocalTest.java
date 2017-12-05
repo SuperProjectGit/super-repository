@@ -25,12 +25,12 @@ public class ThreadLocalTest extends BaseTest {
     public static void main(String[] args) throws InterruptedException {
         final ThreadLocalTest test = new ThreadLocalTest();
 
-        //test.set();
+        test.set();
         System.out.println(test.getLong());
         System.out.println(test.getString());
 
         Thread thread1 = new Thread(() -> {
-            //test.set();
+            test.set();
             System.out.println(test.getLong());
             System.out.println(test.getString());
         });

@@ -6,20 +6,29 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 public class ThreadTest {
+
+	private static final CustomThreadFactory threadFactory = new CustomThreadFactory("test");
+
+	private static final ThreadPoolExecutor pool = new ThreadPoolExecutor(5, 10, 200, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<Runnable>(5), threadFactory);
+
 	public static void main(String[] args) {
-		CustomThreadFactory threadFactory = new CustomThreadFactory("test");
-		ThreadPoolExecutor pool = new ThreadPoolExecutor(5, 10, 200, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<Runnable>(5), threadFactory);
-		ThreadTest t = new ThreadTest();
-		for(int i=0; i< 15; i++) {
+		for(int i=0; i< 12; i++) {
 			MyTask myTask = new MyTask(i);
 			pool.execute(myTask);
 			System.out.println("线程池中线程数目：" + pool.getPoolSize() + ", 队列中等待执行的任务数目：" + pool.getQueue().size() + ", 已执行完的任务数目：" + pool.getCompletedTaskCount());
 		}
+		new ThreadTest().test1();
 		pool.shutdown();
 		if (pool.isShutdown()) {
 			System.out.println(threadFactory.getStats());
 		}
 	}
+
+	public void test1() {
+		MyTask myTask = new MyTask(10000);
+		ThreadTest.pool.execute(myTask);
+	}
+
 	static class MyTask implements Runnable {
 		private Integer taskNum;
 		

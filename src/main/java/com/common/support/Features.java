@@ -29,8 +29,10 @@ public class Features {
         list.add("4");
         list.add("5");
         list.stream().filter(s->list.contains("1")).forEach(s -> System.out.println(s));
+        list.stream().filter(s -> s.equals("2")).collect(Collectors.toList()).forEach(s -> System.out.println(s));
         Collection<Task> tasks = Arrays.asList(new Task(Status.OPEN, 5), new Task(Status.OPEN, 13), new Task(Status.CLOSED, 8));
         tasks.forEach(task -> System.out.println(task.toString()));
+        tasks.stream().filter(task -> task.getStatus().equals(Status.OPEN) && task.getPoints().equals(5)).collect(Collectors.toList()).forEach(task -> System.out.println(task.toString()));
         long totalPointsOfOpenTasks = tasks.stream().filter(task -> task.getStatus() == Status.OPEN).mapToInt(Task::getPoints).sum();
         System.out.println("open tasks total points: " + totalPointsOfOpenTasks);
         double totalPointsOfAllTasks = tasks.stream().parallel().mapToInt(Task::getPoints).reduce(0, Integer::sum);
@@ -53,6 +55,7 @@ public class Features {
         Clock clock = Clock.systemUTC();
         System.out.println(clock.instant());
         System.out.println(clock.getZone());
+        System.out.println(clock.millis());
         System.out.println(sdf.format(clock.millis()));
         try {
             Thread.sleep(5000);
