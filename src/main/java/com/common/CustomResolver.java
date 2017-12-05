@@ -7,6 +7,8 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
+import java.lang.reflect.Method;
+
 /**
  * @author super
  * Create time 2017/12/4 22:11
@@ -21,6 +23,9 @@ public class CustomResolver implements HandlerMethodArgumentResolver {
     @Override
     public Object resolveArgument(MethodParameter methodParameter, ModelAndViewContainer modelAndViewContainer, NativeWebRequest nativeWebRequest, WebDataBinderFactory webDataBinderFactory) throws Exception {
         System.out.println(methodParameter.getParameterName());
-        return methodParameter;
+        String parameterType = methodParameter.getParameterType().getTypeName();
+        Method method = methodParameter.getMethod();
+        String value = method.getName();
+        return value;
     }
 }
