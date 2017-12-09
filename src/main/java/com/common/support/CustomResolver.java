@@ -1,4 +1,4 @@
-package com.common;
+package com.common.support;
 
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
