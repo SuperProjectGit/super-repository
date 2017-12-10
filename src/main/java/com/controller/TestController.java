@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.common.annotations.XSS;
 import com.common.quartz.QuartzSpring;
 import com.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class TestController {
 
     @RequestMapping("test1")
     @ResponseBody
-    public String test(String name) {
+    public String test1(@XSS String name) {
         System.out.println(name);
         return "success";
     }

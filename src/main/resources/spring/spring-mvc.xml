@@ -29,6 +29,14 @@
 		</mvc:argument-resolvers>
 	</mvc:annotation-driven>
 
+	<!-- 拦截器 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<bean class="com.interceptor.CustomerInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+
 	<!-- 定义JSP文件的位置 -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -45,12 +53,12 @@
 		<property name="maxUploadSize" value="52428800" />
 		<property name="maxInMemorySize" value="52428800" />
 	</bean>
-	<!--<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
 		<property name="customArgumentResolvers">
 			<list>
 				<bean class="com.common.support.CustomResolver"></bean>
 			</list>
 		</property>
-	</bean>-->
+	</bean>
 	<aop:aspectj-autoproxy proxy-target-class="true"/>
 </beans>
