@@ -1,5 +1,7 @@
 package com.common.support;
 
+import com.common.annotations.XSS;
+import org.apache.commons.lang3.ArrayUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -29,11 +31,21 @@ public class CustomerAspect {
         Object[] args = joinpoint.getArgs();
         String[] name = ((CodeSignature)joinpoint.getStaticPart().getSignature()).getParameterNames();
         System.out.println("customer method around");
-        args[0] = "aspectjs value";
         MethodSignature signature = (MethodSignature) ((MethodInvocationProceedingJoinPoint)joinpoint).getSignature();
         Annotation[][] annotations = signature.getMethod().getParameterAnnotations();
-        for (Annotation[] annotation : annotations) {
-            
+        for (int i= 0; i< annotations.length; i++) {
+            Annotation[] annotation = annotations[i];
+            boolean flag = false;
+            for (Annotation temp : annotation) {
+                if (temp instanceof XSS) {
+                    flag = true;
+                }
+            }
+            if (flag) {
+                System.out.println("before args[" + i + "]=" + args[i]);
+                args[i] = "aspectjs value";
+                System.out.println("after args[" + i + "]=" + args[i]);
+            }
         }
         joinpoint.proceed(args);
     }
