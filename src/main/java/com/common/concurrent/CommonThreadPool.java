@@ -3,9 +3,7 @@ package com.common.concurrent;
 import org.springframework.beans.factory.annotation.Value;
 
 import javax.sql.PooledConnection;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 /**
  * @author super
@@ -27,6 +25,16 @@ public class CommonThreadPool {
 
     public static void asyncExecute(Runnable runnable) {
         pool.execute(runnable);
+    }
+
+    public static void submit(Callable<String> callable) {
+        try {
+            Future future = pool.submit(callable);
+            String result = (String) future.get();
+            System.out.println(result);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public static Integer getPoolSize() {
