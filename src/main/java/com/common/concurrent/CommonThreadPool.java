@@ -27,14 +27,16 @@ public class CommonThreadPool {
         pool.execute(runnable);
     }
 
-    public static void submit(Callable<String> callable) {
+    public static Future submit(Callable callable) {
+        Future future = null;
         try {
-            Future future = pool.submit(callable);
+            future = pool.submit(callable);
             String result = (String) future.get();
             System.out.println(result);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+        return future;
     }
 
     public static Integer getPoolSize() {
