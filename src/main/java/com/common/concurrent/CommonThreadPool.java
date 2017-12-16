@@ -19,7 +19,7 @@ public class CommonThreadPool {
 
     static {
         CustomThreadFactory threadFactory = new CustomThreadFactory("common");
-        pool = new ThreadPoolExecutor(5, 10, 200, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<Runnable>(10), threadFactory);
+        pool = new ThreadPoolExecutor(5, 10, 200, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<Runnable>(400), threadFactory);
         pool.allowCoreThreadTimeOut(true);
     }
 
