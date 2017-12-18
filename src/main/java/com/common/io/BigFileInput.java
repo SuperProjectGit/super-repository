@@ -26,6 +26,11 @@ public class BigFileInput {
 
     private static final Logger logger = LoggerFactory.getLogger(BigFileInput.class);
 
+    /**
+     * scanner file
+     * @param path
+     * @return
+     */
     public static String scannerFile(String path) {
         FileInputStream inputStream = null;
         Scanner scanner = null;
@@ -35,7 +40,7 @@ public class BigFileInput {
             scanner = new Scanner(inputStream, "UTF-8");
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
-                appendFile("F:\\app.log", line);
+                //appendFile("F:\\app.log", line);
                 logger.info(line);
             }
         } catch (Exception e) {
@@ -74,12 +79,34 @@ public class BigFileInput {
         }
     }
 
+    /**
+     * commins io 性能优于scanner
+     * @param path
+     */
+    public static void commonsIoFile(String path) {
+        LineIterator iterator = null;
+        try {
+            iterator = FileUtils.lineIterator(new File(path), "UTF-8");
+            while (iterator.hasNext()) {
+                String line = iterator.nextLine();
+                logger.info(line);
+            }
+        } catch (IOException e) {
+            logger.info(e.getMessage());
+        } finally {
+            if (null != iterator) {
+                LineIterator.closeQuietly(iterator);
+            }
+        }
+
+    }
+
     public static void main(String[] args) {
         String path = "F:\\app.log";
         Long before = System.currentTimeMillis();
         System.out.println("before:" + before);
         //scannerFile(path);
-        CountDownLatch countDownLatch = new CountDownLatch(5);
+        /*CountDownLatch countDownLatch = new CountDownLatch(5);
         for (int i= 0; i< 5; i++) {
             CommonThreadPool.asyncExecute(() -> {
                 for (int j= 0; j< 512; j++) {
@@ -92,7 +119,8 @@ public class BigFileInput {
             countDownLatch.await();
         } catch (InterruptedException e) {
             logger.info(e.getMessage());
-        }
+        }*/
+        commonsIoFile(path);
         Long after = System.currentTimeMillis();
         System.out.println("after:" + after);
         long ti = after - before;
