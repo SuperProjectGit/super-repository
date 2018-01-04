@@ -67,6 +67,10 @@ public class Test extends BaseTest {
         System.out.println("map is assignable from map1:" + map.getClass().isAssignableFrom(map1.getClass()));
         System.out.println("Map is assignable from MultiValueMap:" + Map.class.isAssignableFrom(MultiValueMap.class));
         System.out.println("MultiValueMap is assignable from HashMap:" + MultiValueMap.class.isAssignableFrom(HashMap.class));
+        int y = 2;
+        int x = 3;
+        int z = 4;
+        System.out.println(y+=z--/++x);
     }
 
     @org.junit.Test
