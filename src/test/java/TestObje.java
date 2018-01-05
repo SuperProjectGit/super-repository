@@ -1,3 +1,11 @@
+import com.alibaba.fastjson.JSONObject;
+import com.pojo.User;
+import org.apache.commons.beanutils.BeanMap;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.SocketHandler;
+
 /**
  * 测试
  *
@@ -37,5 +45,16 @@ public class TestObje {
         TestObje obj = new TestObje();
         obj.tt(obj);
         System.out.println(obj.getId());
+
+        User user = new User();
+        user.setId(1);
+        BeanMap beanMap = new BeanMap(user);
+        beanMap.entrySet().stream().forEach(entry -> System.out.println("key: " + entry.getKey() + " value: " + entry.getValue()));
+        beanMap.entrySet().stream().filter(entry -> entry.getValue() != null).forEach(entry -> System.out.println("key: " + entry.getKey() + "value: " + entry.getValue()));
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("1", 1);
+        map.put("2", null);
+        System.out.println(map);
     }
 }
