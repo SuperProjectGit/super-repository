@@ -1,8 +1,5 @@
 package com.common.concurrent;
 
-import org.springframework.beans.factory.annotation.Value;
-
-import javax.sql.PooledConnection;
 import java.util.concurrent.*;
 
 /**
@@ -12,7 +9,7 @@ import java.util.concurrent.*;
  */
 public class CommonThreadPool {
 
-    private static ThreadPoolExecutor pool = null;
+    private static ThreadPoolExecutor pool;
 
     private CommonThreadPool() {
     }
