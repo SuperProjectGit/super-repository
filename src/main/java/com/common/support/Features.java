@@ -1,5 +1,7 @@
 package com.common.support;
 
+import com.google.common.collect.Lists;
+
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
@@ -12,6 +14,7 @@ import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Java8新特性
@@ -39,6 +42,41 @@ public class Features {
         System.out.println("all tasks total points: " + totalPointsOfAllTasks);
         System.out.println("group by tasks: " + tasks.stream().collect(Collectors.groupingBy(Task::getStatus)));
         System.out.println("result: " + tasks.stream().mapToInt(Task::getPoints).asLongStream().mapToDouble(points -> points / totalPointsOfAllTasks).boxed().mapToLong(weight -> (long)(weight*100)).mapToObj(percentage -> percentage + "%").collect(Collectors.toList()));
+
+        // 使用Stream静态方法来创建Stream
+        // 1. of方法：有两个overload方法，一个接受变长参数，一个接口单一值
+        Stream<Integer> integerStream = Stream.of(1,2,3,5);
+        Stream<String> stringStream = Stream.of("super");
+        // 2. generator方法：生成一个无限长度的Stream，其元素的生成是通过给定的Supplier（这个接口可以看成一个对象的工厂，每次调用返回一个给定类型的对象）
+        // 三条语句的作用都是一样的，只是使用了lambda表达式和方法引用的语法来简化代码。
+        // 每条语句其实都是生成一个无限长度的Stream，其中值是随机的。
+        // 这个无限长度Stream是懒加载，一般这种无限长度的Stream都会配合Stream的limit()方法来用。
+        Stream.generate(new Supplier<Object>() {
+            @Override
+            public Object get() {
+                return Math.random();
+            }
+        });
+        Stream.generate(() -> Math.random());
+        Stream.generate(Math::random);
+        // 3. iterate方法：也是生成无限长度的Stream，和generator不同的是，
+        // 其元素的生成是重复对给定的种子值(seed)调用用户指定函数来生成的。
+        // 其中包含的元素可以认为是：seed，f(seed),f(f(seed))无限循环
+        // 这段代码就是先获取一个无限长度的正整数集合的Stream，然后取出前10个打印。千万记住使用limit方法，不然会无限打印下去。
+        Stream.iterate(1, item -> item + 1).limit(10).forEach(System.out::println);
+
+        // peek: 生成一个包含原Stream的所有元素的新Stream，同时会提供一个消费函数（Consumer实例），新Stream每个元素被消费的时候都会执行给定的消费函数；
+        // skip: 返回一个丢弃原Stream的前N个元素后剩下元素组成的新Stream，如果原Stream中包含的元素个数小于N，那么返回空Stream；
+        List<Integer> nums = Lists.newArrayList(1,1,null,2,3,4,null,5,6,7,8,9,10);
+        System.out.println("sum is:" + nums.stream().filter(num -> num != null).distinct().mapToInt(num -> num* 2).peek(System.out::println).skip(2).limit(4).sum());
+        /**
+         * 对于一个Stream进行多次转换操作，每次都对Stream的每个元素进行转换，而且是执行多次，
+         * 这样时间复杂度就是一个for循环里把所有操作都做掉的N（转换的次数）倍啊。
+         * 其实不是这样的，转换操作都是lazy的，多个转换操作只会在汇聚(reduce)操作的时候融合起来，一次循环完成。
+         * 我们可以这样简单的理解，Stream里有个操作函数的集合，每次转换操作就是把转换函数放入这个集合中，
+         * 在汇聚操作的时候循环Stream对应的集合，然后对每个元素执行所有的函数。
+         */
+
         // optional
         Optional<String> optional = Optional.ofNullable(null);
         System.out.println("optional is set ? " + optional.isPresent());
