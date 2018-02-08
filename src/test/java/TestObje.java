@@ -1,6 +1,8 @@
 import com.alibaba.fastjson.JSONObject;
 import com.pojo.User;
 import org.apache.commons.beanutils.BeanMap;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,6 +15,8 @@ import java.util.logging.SocketHandler;
  * @create 2017-10-31 18:29
  **/
 public class TestObje {
+
+    private final static Logger logger = LoggerFactory.getLogger(TestObje.class);
 
     private Integer id;
 
@@ -42,7 +46,7 @@ public class TestObje {
     }
 
     public static void main(String[] args) {
-        TestObje obj = new TestObje();
+        /*TestObje obj = new TestObje();
         obj.tt(obj);
         System.out.println(obj.getId());
 
@@ -56,5 +60,13 @@ public class TestObje {
         map.put("1", 1);
         map.put("2", null);
         System.out.println(map);
+
+        String ss = "{\"loanStatus\":[\"AUTHORIZE_CONTACTS\"],\"lendRequestId\":[\"10001563\"],\"userId\":[\"463\"],\"loanId\":[\"835\"]}";
+        JSONObject jsonObject = JSONObject.parseObject(ss);
+        Boolean t = jsonObject.getBoolean("Bind");
+        System.out.println(t);*/
+        String s = "safddsfds/user/updateClientVersion";
+        System.out.println(s.contains("/user/updateClientVersion"));
+        logger.error("dfsfsd", new NullPointerException(null));
     }
 }
