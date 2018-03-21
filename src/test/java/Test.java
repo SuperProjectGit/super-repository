@@ -71,6 +71,9 @@ public class Test extends BaseTest {
         int x = 3;
         int z = 4;
         System.out.println(y+=z--/++x);
+
+        int[] aaa = new int[24];
+        System.out.println(aaa[23]);
     }
 
     @org.junit.Test
