@@ -6,6 +6,7 @@ import org.springframework.cglib.beans.BeanMap;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -74,6 +75,10 @@ public class Test extends BaseTest {
 
         int[] aaa = new int[24];
         System.out.println(aaa[23]);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_YEAR, -1);
+        System.out.println(calendar.getTime());
     }
 
     @org.junit.Test
