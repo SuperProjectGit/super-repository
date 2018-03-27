@@ -1,3 +1,5 @@
+import org.apache.commons.lang3.ArrayUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,5 +34,7 @@ public class CollectionsTest extends BaseTest {
             System.out.println(list.subList(i*5, (i + 1)*5 > size ? size : (i + 1)*5));
             System.out.println(((i + 1)*5 > size ? size : (i + 1)*5) - i*5);
         }
+        String ss = "";
+        System.out.println(ArrayUtils.contains(ss.split(","), "12"));
     }
 }
