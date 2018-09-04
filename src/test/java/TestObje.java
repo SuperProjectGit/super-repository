@@ -1,6 +1,7 @@
 import com.alibaba.fastjson.JSONObject;
 import com.pojo.User;
 import org.apache.commons.beanutils.BeanMap;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -68,5 +69,15 @@ public class TestObje {
         String s = "safddsfds/user/updateClientVersion";
         System.out.println(s.contains("/user/updateClientVersion"));
         logger.error("dfsfsd", new NullPointerException(null));
+        String ss = "4.1.0";
+        String temp = "4.1.0";
+        System.out.println(ss.compareTo(temp));
+
+        String t1 = "12312*****1dfdsfds";
+        System.out.println(t1.indexOf("*"));
+        System.out.println(t1.lastIndexOf("*"));
+        System.out.println(t1.substring(0, t1.indexOf("*")));
+        System.out.println(t1.length() - (t1.lastIndexOf("*") + 1));
+        System.out.println(t1.substring(t1.length() - (t1.length() - (t1.lastIndexOf("*") + 1)), t1.length()));
     }
 }
