@@ -1,6 +1,6 @@
 package com.common.concurrent;
 
-/**
+/**yi
  * 3个线程，顺序打印1-100，线程1打印1，线程2打印2，线程3打印3。。。以此类推
  *
  * @author super
