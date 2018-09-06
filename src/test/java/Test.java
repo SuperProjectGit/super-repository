@@ -79,6 +79,9 @@ public class Test extends BaseTest {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_YEAR, -1);
         System.out.println(calendar.getTime());
+
+        System.out.println(3%5);
+        System.out.println(3 & (5-1));
     }
 
     @org.junit.Test
