@@ -15,4 +15,8 @@ public class TestServiceImpl implements TestService {
     public void testService() {
         System.out.println("test service thread:" + Thread.currentThread().getName());
     }
+
+    public int test(int a, int b, int c) {
+        return (a+b)*c;
+    }
 }

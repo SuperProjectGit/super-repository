@@ -1,4 +1,7 @@
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Random;
+import java.util.UUID;
 
 /**
  * random test
@@ -24,6 +27,7 @@ public class RandomTest extends BaseTest {
         char tt = '`' + 8;
         System.out.println(tt);
         System.out.println(randomString(-229985452) + " " + randomString(-147909649));
+        System.out.println(StringUtils.replace(UUID.randomUUID().toString(), "-", ""));
     }
 
     public static String randomString(int t) {

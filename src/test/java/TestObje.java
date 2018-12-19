@@ -69,8 +69,8 @@ public class TestObje {
         String s = "safddsfds/user/updateClientVersion";
         System.out.println(s.contains("/user/updateClientVersion"));
         logger.error("dfsfsd", new NullPointerException(null));
-        String ss = "4.1.0";
-        String temp = "4.1.0";
+        String ss = "4.3.201";
+        String temp = "4.3.2";
         System.out.println(ss.compareTo(temp));
 
         String t1 = "12312*****1dfdsfds";
@@ -79,5 +79,13 @@ public class TestObje {
         System.out.println(t1.substring(0, t1.indexOf("*")));
         System.out.println(t1.length() - (t1.lastIndexOf("*") + 1));
         System.out.println(t1.substring(t1.length() - (t1.length() - (t1.lastIndexOf("*") + 1)), t1.length()));
+        String temp1 = "1";
+        switch (temp1) {
+            case "1" :
+                System.out.println(1);
+                return;
+            case "2" :
+                System.out.println(2);
+        }
     }
 }
