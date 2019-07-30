@@ -29,6 +29,7 @@ public class CollectionsTest extends BaseTest {
         list.add("10");
         list.add("11");
         System.out.println(list.stream().filter(t -> Integer.valueOf(t) > 6).count());
+        System.out.println(list.stream().filter(t -> t.equals("11")).map(t -> Integer.valueOf(t)).findFirst().orElse(1));
         int size = list.size();
         System.out.println((int)Math.ceil(0.111));
         int times = (int)Math.ceil((double)size/5);

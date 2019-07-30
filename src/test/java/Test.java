@@ -1,6 +1,11 @@
 import com.common.quartz.QuartzSpring;
 import com.pojo.User;
+import java.math.BigDecimal;
+import java.util.Optional;
 import javafx.beans.binding.ObjectExpression;
+import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.beans.BeanMap;
 import org.springframework.util.LinkedMultiValueMap;
@@ -63,7 +68,7 @@ public class Test extends BaseTest {
         Map map = BeanMap.create(user);
         System.out.println(map);*/
 
-        Map<String, Object> map = new HashMap<>();
+        /*Map<String, Object> map = new HashMap<>();
         MultiValueMap<String, Object> map1 = new LinkedMultiValueMap<>();
         System.out.println("map is assignable from map1:" + map.getClass().isAssignableFrom(map1.getClass()));
         System.out.println("Map is assignable from MultiValueMap:" + Map.class.isAssignableFrom(MultiValueMap.class));
@@ -81,7 +86,21 @@ public class Test extends BaseTest {
         System.out.println(calendar.getTime());
 
         System.out.println(3%5);
-        System.out.println(3 & (5-1));
+        System.out.println(3 & (5-1));*/
+
+       /* String temp = "sdfdsdsf%sfdsfsfsdfds%s";
+        System.out.println(String.format(temp, 1, 2));
+
+        System.out.println(DigestUtils.md5Hex("zyf668"));*/
+
+        //System.out.println("4.3.10".compareTo("4.3.9"));
+        /*String tt = "11,112,113,134,,,";
+        System.out.println(ArrayUtils.contains(tt.split(","), "11"));
+        System.out.println(new BigDecimal(101).divide(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_UP));
+        System.out.println(StringUtils.isNotBlank(null));*/
+        User user = new User();
+        user.setName("tom");
+        System.out.println(Optional.ofNullable(user).map(value -> value.getName()).orElse("jerry"));
     }
 
     @org.junit.Test
