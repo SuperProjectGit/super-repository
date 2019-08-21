@@ -14,6 +14,10 @@ import org.springframework.util.MultiValueMap;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.SynchronousQueue;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Test
@@ -101,6 +105,7 @@ public class Test extends BaseTest {
         User user = new User();
         user.setName("tom");
         System.out.println(Optional.ofNullable(user).map(value -> value.getName()).orElse("jerry"));
+        queue();
     }
 
     @org.junit.Test
@@ -112,5 +117,41 @@ public class Test extends BaseTest {
         Integer t = i;
         t = null;
         System.out.println(t.equals(1));
+    }
+
+    public static void queue() {
+        try {
+            BlockingQueue<String> temp = new SynchronousQueue<>();
+            CompletableFuture<Void> t1 = CompletableFuture.runAsync(() -> {
+                try {
+                    for (int i = 0; i < 4; i++) {
+                        TimeUnit.SECONDS.sleep(4);
+                        temp.offer(String.valueOf(i));
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            });
+            CompletableFuture<String> t2 = CompletableFuture.supplyAsync(() -> {
+                try {
+                    for (int i = 0; i < 4; i++) {
+                        String str = temp.take();
+                        System.out.println("from synchronous queue " + str);
+                    }
+                    return "";
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                return "";
+            });
+            CompletableFuture.allOf(t1, t2);
+            System.out.println(temp.size());
+            System.out.println(temp.offer("2"));
+            System.out.println(temp.offer("3"));
+            System.out.println(temp.offer("4"));
+            //System.out.println(temp.take());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
