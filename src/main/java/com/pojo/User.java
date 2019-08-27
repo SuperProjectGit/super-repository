@@ -1,5 +1,7 @@
 package com.pojo;
 
+import com.alibaba.fastjson.JSONObject;
+
 /**
  * 用户类
  *
@@ -46,5 +48,10 @@ public class User {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    @Override
+    public String toString() {
+        return JSONObject.toJSONString(this);
     }
 }

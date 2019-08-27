@@ -1,11 +1,15 @@
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
-
-import java.io.FileOutputStream;
-import java.io.OutputStream;
+import com.alibaba.fastjson.JSONObject;
+import com.pojo.User;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.cglib.beans.BeanMap;
 
 /**
  * 集合测试类
@@ -53,5 +57,33 @@ public class CollectionsTest extends BaseTest {
 
         int[] x = new int[25];
         System.out.println(x[24]);
+        System.out.println(Arrays.asList(1, 3, 2, 4, 2, 3).stream().sorted().distinct().collect(Collectors.toList()));
+        User tom = new User();
+        tom.setAge("12");
+        tom.setName("tom");
+        User jerry = new User();
+        jerry.setAge("13");
+        jerry.setName("jerry");
+        User max = new User();
+        max.setAge("12");
+        max.setName("max");
+        User tom1 = new User();
+        tom1.setAge("15");
+        tom1.setName("tom");
+        User jerry1 = new User();
+        jerry1.setAge("9");
+        jerry1.setName("jerry");
+        List<User> users = Arrays.asList(tom, jerry, max, tom1, jerry1);
+        System.out.println(users.stream().collect(Collectors.groupingBy(User::getName)));
+        System.out.println(users.stream().collect(Collectors.groupingBy(User::getName, Collectors.counting())));
+        try {
+            Map<String, String> map = BeanUtils.describe(tom);
+            map.forEach((k,v) -> System.out.println("key=" + k + " value=" + v));
+            Map<String, String> map1 = JSONObject.parseObject(JSONObject.toJSONString(tom), Map.class);
+            map1.forEach((k,v) -> System.out.println("key=" + k + " value=" + v));
+            BeanMap.create(tom).forEach((k,v) -> System.out.println("key=" + k + " value=" + v));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
