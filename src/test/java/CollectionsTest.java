@@ -1,11 +1,14 @@
 import com.alibaba.fastjson.JSONObject;
 import com.pojo.User;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -84,6 +87,68 @@ public class CollectionsTest extends BaseTest {
             BeanMap.create(tom).forEach((k,v) -> System.out.println("key=" + k + " value=" + v));
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        System.out.println("============================================");
+        Stream.iterate(new int[]{1, 2, 1}, t -> new int[]{t[1] - t[2],t[1] << 1, t[2] << 1}).limit(4).forEach(t -> System.out.println(JSONObject.toJSONString(t)));
+        Tax tax1 = Stream.iterate(new Tax(), tax -> {
+            tax.setSumSalary(tax.getSumSalary() + tax.getSalary());
+            tax.setSumReduced(tax.getSumReduced() + tax.getReduced());
+            tax.setTax(tax.getSumSalary() - tax.getSumReduced());
+            return tax;
+        }).limit(4).max(Comparator.comparingInt(Tax::getSumSalary)).get();
+        System.out.println(JSONObject.toJSONString(tax1));
+        System.out.println(new BigDecimal("0.210").setScale(2, RoundingMode.HALF_UP).toPlainString());
+    }
+
+    public static class Tax {
+        private int salary = 20;
+
+        private int reduced = 10;
+
+        private int tax;
+
+        private int sumSalary = 20;
+
+        private int sumReduced = 10;
+
+        public int getSalary() {
+            return salary;
+        }
+
+        public void setSalary(int salary) {
+            this.salary = salary;
+        }
+
+        public int getReduced() {
+            return reduced;
+        }
+
+        public void setReduced(int reduced) {
+            this.reduced = reduced;
+        }
+
+        public int getTax() {
+            return tax;
+        }
+
+        public void setTax(int tax) {
+            this.tax = tax;
+        }
+
+        public int getSumSalary() {
+            return sumSalary;
+        }
+
+        public void setSumSalary(int sumSalary) {
+            this.sumSalary = sumSalary;
+        }
+
+        public int getSumReduced() {
+            return sumReduced;
+        }
+
+        public void setSumReduced(int sumReduced) {
+            this.sumReduced = sumReduced;
         }
     }
 }

@@ -102,6 +102,7 @@ public class Test extends BaseTest {
         System.out.println(ArrayUtils.contains(tt.split(","), "11"));
         System.out.println(new BigDecimal(101).divide(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_UP));
         System.out.println(StringUtils.isNotBlank(null));*/
+        System.out.println(253125L << 7L);
         User user = new User();
         user.setName("tom");
         System.out.println(Optional.ofNullable(user).map(value -> value.getName()).orElse("jerry"));
