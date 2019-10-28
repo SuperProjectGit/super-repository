@@ -29,6 +29,7 @@ public class RandomTest extends BaseTest {
         System.out.println(randomString(-229985452) + " " + randomString(-147909649));
         System.out.println(StringUtils.replace(UUID.randomUUID().toString(), "-", ""));
         System.out.println(UUID.randomUUID().toString().replace("-", ""));
+        System.out.println(-1%8);
     }
 
     public static String randomString(int t) {

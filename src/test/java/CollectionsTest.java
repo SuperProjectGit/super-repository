@@ -98,6 +98,16 @@ public class CollectionsTest extends BaseTest {
         }).limit(4).max(Comparator.comparingInt(Tax::getSumSalary)).get();
         System.out.println(JSONObject.toJSONString(tax1));
         System.out.println(new BigDecimal("0.210").setScale(2, RoundingMode.HALF_UP).toPlainString());
+        System.out.println("======================================");
+        List<String> list1 = new ArrayList<>();
+        list1.add("1");
+        list1.add("2");
+        list1.add("3");
+        list1.add("4");
+        list1.add("5");
+        list1.add("6");
+        System.out.println(list1.removeIf(t -> {return t.equals("5");}));
+        System.out.println(list1);
     }
 
     public static class Tax {
